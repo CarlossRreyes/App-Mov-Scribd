@@ -1,0 +1,92 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>repository</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- <ion-button (click)="register()" expand="block" fill="clear" shape="round">
+    Click me
+  </ion-button>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-subtitle>Awesome Subtitle</ion-card-subtitle>
+      <ion-card-title>Awesome Title</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Awesome content
+    </ion-card-content>
+  </ion-card> -->
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="6" *ngFor="let d of listAllDocuments"  >
+        <ion-card  mode="ios" class=" mx-1" >
+          <ion-card-header mode="md" >
+            <div class="text-center">
+              <img width="70%" src="http://127.0.0.1/api-scribd/imagenes/{{d.document_id.image}}" alt="">
+
+            </div>
+            <!-- <ion-card-subtitle>Tipo: {{d.document_id.type}}</ion-card-subtitle> -->
+            <!-- <ion-badge color="" mode="ios">{{ d.document_id.type }}</ion-badge> -->
+            <ion-badge [color]="(d.document_id.type === 'DOC') ? 'primary' : ((d.document_id.type === 'PDF') ? 'danger' : 'warning')" mode="ios">
+              {{ d.document_id.type }}
+            </ion-badge>
+            <ion-card-title mode="" class="text-center">{{ d.document_id.name }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content mode="md" >
+            <div class="text-justify">
+              <ion-label> {{ d.document_id.description }} </ion-label>
+            </div>
+            <div class="ion-align-items-center">
+              <ion-icon slot="start" name="earth"></ion-icon>
+              <ion-label class="font-bold"> {{ d.document_id.date_upload }} </ion-label>
+            </div>
+            <!-- <div class="text-center">
+              <ion-button  fill="clear" mode="ios">
+                <ion-icon color="primary" style="font-size: 25px"  name="eye"></ion-icon>
+              </ion-button>
+            </div> -->
+            <ion-row class="ion-align-items-center mt-2" style="margin-top: -15px;">
+              <ion-col size="4"  class="ion-text-center" style="height: 50px;">                
+                <div class="centered-icon">
+                  <ion-button color="dark" mode="ios"  fill="clear" >                    
+                    <ion-icon  slot="icon-only"  name="eye"></ion-icon>
+                  </ion-button>
+                </div>                                       
+              </ion-col>
+              <!-- <ion-col size="4" class="ion-text-center" >                    
+                <ion-label style="font-size: 16px; margin-top: 20px; " >55</ion-label>
+              </ion-col> -->
+              <ion-col size="4" class="ion-text-center" style=" height: 50px;">
+                <div class="centered-icon">
+                  <ion-button 
+                    
+                    color="danger" mode="ios"  fill="clear"
+                  >                    
+                    <ion-icon slot="start"  style="font-size: 25px" name="chatbubble-ellipses"></ion-icon>
+                    10
+                    <!-- <ion-icon  style="font-size: 25px"  name="cloud-download"></ion-icon> -->
+                  </ion-button>
+                  
+                </div>                    
+              </ion-col>
+              <ion-col size="4" class="ion-text-center" style=" height: 50px;">
+                <div class="centered-icon">
+                  <ion-button 
+                    [disabled]="d.document_id.download_permission === 1 ? true : false " 
+                    color="primary" mode="ios"  fill="clear"
+                  >                    
+                    <ion-icon slot="icon-only"   name="cloud-download"></ion-icon>
+                  </ion-button>
+                </div>                    
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>      
+    </ion-row>
+  </ion-grid>
+</ion-content>

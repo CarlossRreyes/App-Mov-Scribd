@@ -1,0 +1,158 @@
+<!-- <ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="medium" (click)="cancel()">Cancelar</ion-button>
+    </ion-buttons>
+    
+   
+  </ion-toolbar>
+</ion-header> -->
+
+<!-- <ion-content>
+
+
+  <ion-card mode="ios" >
+    <ion-card-header>
+      <ion-card-subtitle mode="md">Código: {{ dataSelected === undefined ? '' : dataSelected.document_id.document_id }}</ion-card-subtitle>
+      <ion-card-title>{{ dataSelected === undefined ? 'Nuevo documento' : 'Editar documento' }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content mode="md">
+    </ion-card-content>
+  </ion-card>
+</ion-content> -->
+
+<ion-content >
+  <div class="px-3 py-3">
+
+    <div>
+      <div class="text-100 text-2xl font-semibold mb-3">
+        {{ dataSelected === undefined ? 'Nuevo documento' : 'Editar documento' }}
+      </div>
+    </div>
+
+    <form [formGroup]="formDocument">
+      <div class=" p-fluid p-formgrid grid pt-2 ">
+        <div class="field   col-12 md-col-7 flex justify-content-center ">                            
+          <div>
+            <!-- ngx-dropzone [accept]="'.pdf, .doc, .docxs'"  -->
+              <ngx-dropzone 
+                  ngx-dropzone [accept]="'application/pdf, application/vnd.openxmlformats-officedocument.wordprocessingml.document'" 
+                  [multiple]="false"  
+                  (change)="onSelect($event)"                
+              >
+                  <ngx-dropzone-label class="custom-dropzone">
+                    &nbsp; Toca para subir un archivo &nbsp;
+                  </ngx-dropzone-label>
+                  <ngx-dropzone-preview 
+                                          
+                      *ngFor="let f of files"
+                      [file]="f" 
+                      [removable]="true" 
+                      (removed)="onRemove($event)"
+                  >
+                  <ngx-dropzone-label>{{ f.name }} </ngx-dropzone-label>
+                  </ngx-dropzone-preview>
+                  <!-- ({{ f.type }}) -->
+              </ngx-dropzone>
+          </div>      
+    
+        </div>
+    
+        <div class="field col-12 -mt-3">
+          <ion-label style="color: red; font-weight: bold;" class="font-italic">El campo es obligatorio (*)</ion-label>
+        </div>
+        <div class="field col-12 sm:col-6 -mt-3">
+          <ion-input 
+            formControlName="name" 
+            [ngClass]="{ 'is-invalid': fieldsValidate('name')}"
+            label="Nombre*" 
+            label-placement="floating" fill="solid" 
+            placeholder="Ej. Nombre del documento"></ion-input>
+          <small
+            *ngIf="formDocument.get('name')?.errors?.['required']"          
+          >El nombre es requerido.</small>
+        </div>
+        <div class="field col-12 sm:col-6 -mt-3">
+          <ion-input 
+            formControlName="description"             
+            [ngClass]="{ 'is-invalid': fieldsValidate('description')}"
+            label="Descripción*" 
+            label-placement="floating" fill="solid" 
+            placeholder="Ej. Descripción del documento"></ion-input>
+          <small      
+            *ngIf="formDocument.get('description')?.errors?.['required']" 
+          >La descripción es requerida.</small>
+        </div>
+        <div class="field col-12 sm:col-6 -mt-3">
+          <ion-select 
+            label="Categoría*" label-placement="floating" fill="solid"
+            formControlName="category_id"
+            placeholder="Ej. Literatura, etc.."
+            [ngClass]="{ 'is-invalid': fieldsValidate('category_id')}"    
+          >
+            <ion-select-option 
+              *ngFor="let c of listCatetories"  
+              [value]="c.category_id"
+            >
+              {{ c.name }}
+            </ion-select-option>
+        
+          </ion-select>
+          <small      
+            *ngIf="formDocument.get('category_id')?.errors?.['required']" 
+          >La categoría es requerida.</small>
+        </div>
+        <div class="field col-12 sm:col-6 -mt-3">
+          <ion-select 
+            label="Estado*" label-placement="floating" fill="solid"
+            formControlName="state"
+            [ngClass]="{ 'is-invalid': fieldsValidate('state')}"    
+            placeholder="Ej. Activa"
+          >
+            <ion-select-option 
+              *ngFor="let s of listStates"  
+              value="{{s.value}}"
+            >
+              {{ s.name }}
+            </ion-select-option>
+        
+          </ion-select>
+          <small      
+            *ngIf="formDocument.get('state')?.errors?.['required']" 
+          >El estado es requerida.</small>
+        </div>
+        <div class="field col-12 sm:col-6 -mt-3">
+          <ion-select 
+            label="Acceso*" label-placement="floating" fill="solid"
+            formControlName="download_permission"
+            [ngClass]="{ 'is-invalid': fieldsValidate('download_permission')}"    
+            placeholder="Ej. Activa"
+          >
+            <ion-select-option 
+              *ngFor="let s of listTypePermission"  
+              
+              [value]="s.value"
+            >
+              {{ s.name }}
+            </ion-select-option>
+        
+          </ion-select>
+          <small      
+            *ngIf="formDocument.get('download_permission')?.errors?.['required']" 
+          >El acceso es requerido.</small>
+        </div>
+      </div>
+      <div class="-mt-2 mb-3">
+        <ion-button (click)="saveUpdateDocument()"  mode="ios" [disabled]="formDocument.invalid"  expand="block">
+          Guardar
+        </ion-button>         
+      </div>
+      <div class="-mt-2 mb-3">
+        <ion-button (click)="cancel()"  mode="ios"  expand="block">
+          Cancelar
+        </ion-button>         
+      </div>
+    </form>
+  </div>
+
+</ion-content>
