@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PresentToastService } from 'src/app/utils/services/present-toast.service';
+
 
 @Component({
   selector: 'app-toolbar',
@@ -9,7 +11,8 @@ import { Router } from '@angular/router';
 export class ToolbarComponent  implements OnInit {
 
   constructor(
-    private router: Router
+    private _r: Router,
+    private _ts: PresentToastService
   ) { }
 
   ngOnInit() {}
@@ -17,10 +20,9 @@ export class ToolbarComponent  implements OnInit {
 
 
   onClick(){
-
-    this.router.navigate(['/auth'])
     localStorage.clear();
-
+    this._ts.presentToastController('Gracias por usar scribdd', 'success', 'heart');
+    this._r.navigate(['/auth']);
   }
 
 }

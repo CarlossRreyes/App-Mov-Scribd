@@ -10,7 +10,8 @@ import { UserPage } from './user.page';
 import { CreateUpdatesDocumentsComponent } from './components/create-updates-documents/create-updates-documents.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { HomeModule } from 'src/app/features/home/home.module';
+import { SharedModule } from 'src/app/features/shared/shared.module';
+
 
 
 @NgModule({
@@ -22,7 +23,7 @@ import { HomeModule } from 'src/app/features/home/home.module';
     FormsModule,
     ReactiveFormsModule,
     NgxDropzoneModule,
-    HomeModule
+    SharedModule
   ],
   declarations: [
     UserPage,
