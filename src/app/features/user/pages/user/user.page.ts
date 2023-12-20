@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoadingController, ModalController } from '@ionic/angular';
 
 import { DocumentService } from '../../services/document.service';
 import { AuthService } from 'src/app/features/auth/services/auth.service';
 import { CreateUpdatesDocumentsComponent } from './components/create-updates-documents/create-updates-documents.component';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -11,7 +12,10 @@ import { CreateUpdatesDocumentsComponent } from './components/create-updates-doc
   templateUrl: './user.page.html',
   styleUrls: ['./user.page.scss'],
 })
-export class UserPage implements OnInit {
+export class UserPage implements OnInit, OnDestroy {
+
+
+  private userSubscription: Subscription | undefined;
 
 
   listDocuments: any[] = [];
@@ -23,17 +27,56 @@ export class UserPage implements OnInit {
     private loadingCtrl: LoadingController,
     private _as: AuthService
   ) { 
+    //TODO: Reactive local
+    // this._as.getCurrentUserSubject.subscribe(( res: any ) => {
+    this.loadDataUser();
     
   }
 
-  async ngOnInit(): Promise<void> {
-    await this.getDocuments();
-    await this.getUser();
+  ngOnDestroy() {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
+  }
+
+
+  loadDataUser(){
+    this._as.$getCurrentUserSubject.subscribe((res: any) => {
+      console.log("RESSSS: ", res);
+      
+      if(res instanceof Object){
+        let objEmpty = Object.keys(res).length === 0;
+        if(objEmpty == true){
+          let localData = JSON.parse(localStorage.getItem('user')!) || null;
+          console.log( "LOCAL STOREAGE: ", localData ); //TODO: RESSS = {} && 
+          
+          if(localData != null){           
+             this.user_id = localData.user_id;                          
+          }
+        }else{          
+          this.user_id = res.user_id;//TODO: CORREGIR ESTO                      
+        }        
+      }else{
+        console.log("No es object");        
+      }
+    })
+
 
   }
 
+  async ngOnInit(): Promise<void> {
+    await this.getUser();
+    await this.getDocuments();
+
+  }
+
+  onClickDelete(){
+    console.log("Delete");
+    
+  }
+
   getUser(): Promise<void>{
-    this.user_id = this._as.getUserStorage();
+    // this.user_id = this._as.getUserStorage();
     return new Promise<void>( (resolve, reject ) => {
       this._ds.loadUserById( this.user_id ).subscribe({
         next: ( resp ) => {
@@ -61,7 +104,7 @@ export class UserPage implements OnInit {
       spinner: 'circles'
     });
     loading.present();
-    this._ds.loadDocumentsByUser( 1 ).subscribe({
+    this._ds.loadDocumentsByUser( this.user_id ).subscribe({
       next: ( resp ) => {
         if( !resp.status ){
 
@@ -105,10 +148,10 @@ export class UserPage implements OnInit {
     const modal = await this.modalCtrl.create({
       component: CreateUpdatesDocumentsComponent,
       mode: 'md',
-      // componentProps: {
+      componentProps: {
+        params_user_id: this.user_id
         
-        
-      // }
+      }
     });
     modal.present();
 

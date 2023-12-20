@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-button (click)="cancel()" color="medium">Salir</ion-button>
     </ion-buttons>
-    <ion-title>SCRIBDD</ion-title>   
+    <ion-title>Scribdd</ion-title>   
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -41,7 +41,7 @@
         <ion-icon name="document-lock"></ion-icon>             
       </div>
       <div class="flex align-items-center justify-content-center ml-1">
-        <small class="font-italic">{{ d.document_id.download_permission === 0 ? 'Acceso público': 'Acceso privado' }}</small><br>
+        <small class="font-italic">{{ d.document_id.download_permission === 1 ? 'Acceso público': 'Acceso privado' }}</small><br>
       </div>
     </div>
     <div class="flex align-items-center">

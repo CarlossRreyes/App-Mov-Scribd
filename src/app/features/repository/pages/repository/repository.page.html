@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>repository</ion-title>
+    <ion-title>Scribdd</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -75,7 +75,8 @@
               <ion-col size="4" class="ion-text-center" style=" height: 50px;">
                 <div class="centered-icon">
                   <ion-button 
-                    [disabled]="d.document_id.download_permission === 1 ? true : false " 
+                    (click)="onClickViewDocument(d.document_id.rute)"
+                    [disabled]="d.document_id.download_permission === 1 ? false : true " 
                     color="primary" mode="ios"  fill="clear"
                   >                    
                     <ion-icon slot="icon-only"   name="cloud-download"></ion-icon>

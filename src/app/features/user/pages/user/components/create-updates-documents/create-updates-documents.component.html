@@ -20,6 +20,14 @@
     </ion-card-content>
   </ion-card>
 </ion-content> -->
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()" color="medium">Salir</ion-button>
+    </ion-buttons>
+    <ion-title>Scribdd</ion-title>   
+  </ion-toolbar>
+</ion-header>
 
 <ion-content >
   <div class="px-3 py-3">
@@ -147,11 +155,11 @@
           Guardar
         </ion-button>         
       </div>
-      <div class="-mt-2 mb-3">
+      <!-- <div class="-mt-2 mb-3">
         <ion-button (click)="cancel()"  mode="ios"  expand="block">
           Cancelar
         </ion-button>         
-      </div>
+      </div> -->
     </form>
   </div>
 

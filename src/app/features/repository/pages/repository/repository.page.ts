@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RepositoryService } from '../../services/repository.service';
 import { LoadingController, ModalController } from '@ionic/angular';
 import { ViewRepositoryComponent } from './components/view-repository/view-repository.component';
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-repository',
@@ -21,6 +22,12 @@ export class RepositoryPage implements OnInit {
 
   ngOnInit() {
     this.getAllDocuments();
+  }
+
+  async onClickViewDocument( rute: string ){
+    console.log("To: ", rute );
+    await Browser.open({ url: `http://127.0.0.1/api-scribd/files/${ rute }` });
+    
   }
 
   async getAllDocuments(){

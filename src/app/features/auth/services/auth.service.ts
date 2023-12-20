@@ -1,19 +1,29 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment.prod';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { take, tap } from 'rxjs';
+import { BehaviorSubject, take, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  // private currentUserSubject: BehaviorSubject<any> = new BehaviorSubject<{}>({});
+  // getCurrentUserSubject = this.currentUserSubject.asObservable();
+
+  private currentUserSubject = new BehaviorSubject<{}>({});
+  $getCurrentUserSubject = this.currentUserSubject.asObservable();
+
+  userLoggedIn = new EventEmitter<boolean>();
+
 
   // **************API URL****************
   API_URL = environment.api_url;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
+    private _r: Router
   ) { }
 
 
@@ -46,6 +56,15 @@ export class AuthService {
 
   }
 
+  logOut(){
+    localStorage.clear();
+    // this.userLoggedIn.emit(false);
+    this.currentUserSubject.next({});
+    this._r.navigate(['/auth']);
+
+    
+  }
+
   signIn( credentials: any ){
     const url = `${this.API_URL}/login`;
     return this.http.post<any>( url, this.objectToFormData( credentials ) )
@@ -55,7 +74,14 @@ export class AuthService {
       tap( ( resp ) => { 
         if( resp.status ){
           console.log( resp );
-          localStorage.setItem('user', resp.data );
+          // this.userLoggedIn.emit(true);
+          const user = {
+            user_id: resp.data.user_id,
+            email: resp.data.email
+          }
+
+          this.currentUserSubject.next( user );
+          localStorage.setItem('user', JSON.stringify( resp.data ) );
           
         }
     }));

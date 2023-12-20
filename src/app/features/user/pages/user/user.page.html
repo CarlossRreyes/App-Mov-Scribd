@@ -21,14 +21,18 @@
   >
 
   <ion-card mode="ios">
-    <div class="text-center mt-4">
-      <img width="40%" src="http://127.0.0.1/api-scribd/imagenes/{{ objectUser.person_id.image }}" alt="">
+    
+    <div class="text-center mt-3 -mb-4">
+      <img width="40%" style="border-radius: 50%;" src="http://127.0.0.1/api-scribd/imagenes/{{ objectUser.person_id.image }}" alt="">
+      <!-- <ion-avatar>
+        <img src="http://127.0.0.1/api-scribd/imagenes/{{ objectUser.person_id.image }}" alt="">      
+      </ion-avatar> -->
     </div>
     <ion-card-header class="-mb-2">
       <ion-card-subtitle mode="md">{{ objectUser.email }} <ion-badge color="success" mode="ios">{{ objectUser.state === 'A' ? 'Activa': 'Inactiva'}}</ion-badge></ion-card-subtitle>
       <ion-card-title >{{ objectUser.person_id.name }} {{ objectUser.person_id.last_name }}</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
+    <ion-card-content class="-mb-4">
       <ion-grid fixed>
         <ion-row class="-mx-2">
           <ion-col size="6"  size-sm="6" size-lg="4" size-md="4" size-xl="3" class="text-justify -mt-2">
@@ -64,8 +68,18 @@
   <ion-grid fixed>
     <ion-row>
       <ion-col size="6" *ngFor="let d of listDocuments"  >
-        <ion-card  mode="ios" class=" mx-1" >
-          <ion-card-header mode="md" >
+        <ion-card  mode="ios" class=" mx-1">
+          <ion-card-header mode="md"  >
+            <!-- <ion-toolbar>
+            </ion-toolbar> -->
+            <div class="ion-align-self-end ">
+              
+              
+                <ion-button (click)="onClickDelete()" color="danger" fill="clear" >
+                  <ion-icon slot="icon-only" name="trash"></ion-icon>              
+                </ion-button>
+                                    
+            </div>
             <div class="text-center">
               <img width="70%" src="http://127.0.0.1/api-scribd/imagenes/documents.png" alt="">
 
@@ -76,7 +90,7 @@
             </ion-badge>
             <ion-card-title mode="" class="text-center">{{ d.document_id.name }}</ion-card-title>
           </ion-card-header>
-          <ion-card-content mode="md" >
+          <ion-card-content mode="md"  (click)="onClickEdit( d )" >
             <div class="text-justify">
               <ion-label> {{ d.document_id.description }} </ion-label>
             </div>
@@ -84,11 +98,11 @@
               <ion-icon slot="start" name="earth"></ion-icon>
               <ion-label class="font-bold"> {{ d.document_id.date_upload }} </ion-label>
             </div>
-            <div class="text-center">
+            <!-- <div class="text-center">
               <ion-button (click)="onClickEdit( d )" fill="clear" mode="ios">
-                <ion-icon color="primary" style="font-size: 25px"  name="eye"></ion-icon>
+                <ion-icon color="primary" style="font-size: 25px"  name="trash"></ion-icon>
               </ion-button>
-            </div>
+            </div> -->
           </ion-card-content>
         </ion-card>
 
