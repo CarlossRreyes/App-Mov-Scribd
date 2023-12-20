@@ -1,0 +1,102 @@
+<ion-header mode="ios">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()" color="medium">Salir</ion-button>
+    </ion-buttons>
+    <ion-title>SCRIBDD</ion-title>   
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="px-3 py-3">
+    <div class="text-center">
+      <img width="40%" src="http://127.0.0.1/api-scribd/imagenes/{{d.document_id.image}}" alt="">
+  
+    </div>
+
+    <!-- <ion-badge [color]="(d.document_id.type === 'DOC') ? 'primary' : ((d.document_id.type === 'PDF') ? 'danger' : 'warning')" mode="ios">
+      {{ d.document_id.type }}
+    </ion-badge> -->
+
+ 
+    <div class="text-center">
+      <ion-text  color="primary">
+        <h3 class="font-bold">{{d.document_id.name}}</h3>
+      </ion-text>
+      <ion-badge [color]="(d.document_id.type === 'DOC') ? 'primary' : ((d.document_id.type === 'PDF') ? 'danger' : 'warning')" mode="ios">
+        {{ d.document_id.type }}
+      </ion-badge>
+
+    </div>
+    <p class="text-justify text-semibold">{{d.document_id.description}}</p>
+    <div class="flex align-items-center">
+      <div class="flex align-items-center justify-content-center">
+        <ion-icon name="document-text"></ion-icon>                 
+      </div>
+      <div class="flex align-items-center justify-content-center ml-1">
+        <small class="font-italic">{{ d.document_id.file }}</small><br>
+      </div>
+    </div>
+    <div class="flex align-items-center">
+      <div class="flex align-items-center justify-content-center">
+        <ion-icon name="document-lock"></ion-icon>             
+      </div>
+      <div class="flex align-items-center justify-content-center ml-1">
+        <small class="font-italic">{{ d.document_id.download_permission === 0 ? 'Acceso público': 'Acceso privado' }}</small><br>
+      </div>
+    </div>
+    <div class="flex align-items-center">
+      <div class="flex align-items-center justify-content-center">
+        <ion-icon name="calendar"></ion-icon>                 
+      </div>
+      <div class="flex align-items-center justify-content-center ml-1">
+        <small class="font-italic">{{ d.document_id.date_upload }}</small><br>
+      </div>
+    </div>
+
+    <ion-grid fixed>
+      <ion-row class="-mb-2">
+        <p class="font-bold">Comentarios</p>
+      </ion-row>
+      <ion-row >
+        <ion-col class="-my-2" size="12" *ngFor="let c of d.document_id.comments">
+          <div class="flex align-items-center">
+            <div class="flex align-items-center justify-content-center ">
+              <ion-avatar>
+                <img width="70%" src="http://127.0.0.1/api-scribd/imagenes/{{c.user_id.person_id.image}}" />
+              </ion-avatar>
+            </div>
+            <div class="flex align-items-center justify-content-center ml-2 ">
+              <div class="field">
+                <br>
+                <ion-label  class="font-bold">{{ c.user_id.person_id.name }} {{ c.user_id.person_id.last_name }}</ion-label><br>              
+                <small >{{ c.content }}</small><br>
+                <div class="flex align-items-center">
+                  <div class="flex align-items-center justify-content-center">
+                    <ion-icon slot="start" name="earth"></ion-icon>                    
+                  </div>
+                  <div class="flex align-items-center justify-content-center ml-1">
+                    <small class="font-italic">{{ c.date }}</small><br>
+                  </div>
+                </div>
+              </div>
+            </div>            
+          </div>
+          
+        </ion-col> 
+        <ion-col size="12">
+          <ion-input 
+            
+            
+            label="Añade un comentario*" 
+            label-placement="floating" fill="solid" 
+            placeholder="Ej. Gracias por el aporte..."
+          ></ion-input>
+        </ion-col>       
+      </ion-row>
+    </ion-grid>
+
+
+
+  </div>
+
+</ion-content>

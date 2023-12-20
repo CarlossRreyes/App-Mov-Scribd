@@ -51,7 +51,7 @@
             <ion-row class="ion-align-items-center mt-2" style="margin-top: -15px;">
               <ion-col size="4"  class="ion-text-center" style="height: 50px;">                
                 <div class="centered-icon">
-                  <ion-button color="dark" mode="ios"  fill="clear" >                    
+                  <ion-button (click)="onClickView( d )" color="dark" mode="ios"  fill="clear" >                    
                     <ion-icon  slot="icon-only"  name="eye"></ion-icon>
                   </ion-button>
                 </div>                                       
@@ -66,7 +66,7 @@
                     color="danger" mode="ios"  fill="clear"
                   >                    
                     <ion-icon slot="start"  style="font-size: 25px" name="chatbubble-ellipses"></ion-icon>
-                    10
+                    {{d.document_id.comments.length}}
                     <!-- <ion-icon  style="font-size: 25px"  name="cloud-download"></ion-icon> -->
                   </ion-button>
                   

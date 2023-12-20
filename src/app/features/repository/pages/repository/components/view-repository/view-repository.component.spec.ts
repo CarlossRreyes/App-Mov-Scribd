@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { CreateUpdateRepositoryComponent } from './create-update-repository.component';
+import { ViewRepositoryComponent } from './view-repository.component';
 
-describe('CreateUpdateRepositoryComponent', () => {
-  let component: CreateUpdateRepositoryComponent;
-  let fixture: ComponentFixture<CreateUpdateRepositoryComponent>;
+describe('ViewRepositoryComponent', () => {
+  let component: ViewRepositoryComponent;
+  let fixture: ComponentFixture<ViewRepositoryComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ CreateUpdateRepositoryComponent ],
+      declarations: [ ViewRepositoryComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(CreateUpdateRepositoryComponent);
+    fixture = TestBed.createComponent(ViewRepositoryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

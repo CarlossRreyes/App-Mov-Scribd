@@ -5,7 +5,7 @@ import { CategoryPage } from './pages/category/category.page';
 const routes: Routes = [
   {
     path: '',
-    component: CategoryPage
+    loadChildren: () => import('./pages/category/category.module').then( m => m.CategoryPageModule  )
   }
 ];
 

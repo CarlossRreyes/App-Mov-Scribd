@@ -1,0 +1,6 @@
+.horizontal-list {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;  /* Para permitir el desplazamiento horizontal si hay demasiados elementos */
+    white-space: nowrap;  /* Evita que los elementos se envuelvan a la siguiente línea */
+  }

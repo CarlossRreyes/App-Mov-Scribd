@@ -5,15 +5,16 @@ import { CategoryService } from 'src/app/features/category/services/category.ser
 import { Category } from 'src/app/features/category/interfaces/category.interface';
 import { PresentToastService } from 'src/app/utils/services/present-toast.service';
 import { ToolService } from 'src/app/utils/services/tool.service';
-import { DocumentService } from '../../services/document.service';
+import { DocumentService } from '../../../../services/document.service';
 import { AuthService } from 'src/app/features/auth/services/auth.service';
 
+
 @Component({
-  selector: 'app-create-update-document',
-  templateUrl: './create-update-document.component.html',
-  styleUrls: ['./create-update-document.component.scss'],
+  selector: 'app-create-updates-documents',
+  templateUrl: './create-updates-documents.component.html',
+  styleUrls: ['./create-updates-documents.component.scss'],
 })
-export class CreateUpdateDocumentComponent  implements OnInit {
+export class CreateUpdatesDocumentsComponent  implements OnInit {
   formDocument!: FormGroup;
   listCatetories: Category[] = [];
 
@@ -427,5 +428,7 @@ export class CreateUpdateDocumentComponent  implements OnInit {
       }
     })
   }
+
+
 
 }

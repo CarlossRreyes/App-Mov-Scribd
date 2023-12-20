@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { LayoutPage } from './features/home/layout/layout.page';
 import { AuthGuard } from './core/guards/auth.guard';
 import { SignInGuard } from './core/guards/sign-in.guard';
 

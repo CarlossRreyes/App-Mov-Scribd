@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RepositoryService } from '../../services/repository.service';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
+import { ViewRepositoryComponent } from './components/view-repository/view-repository.component';
 
 @Component({
   selector: 'app-repository',
@@ -15,6 +16,7 @@ export class RepositoryPage implements OnInit {
   constructor(
     private _rs: RepositoryService,
     private loadingCtrl: LoadingController,
+    private modalCtrl: ModalController
   ) { }
 
   ngOnInit() {
@@ -45,6 +47,30 @@ export class RepositoryPage implements OnInit {
       }
     })
   }
+
+  async onClickView( data: any){
+    const modal = await this.modalCtrl.create({
+      component: ViewRepositoryComponent,
+      mode: 'md',
+      componentProps: {
+        
+        keyDocument: data ,
+      }
+    });
+    modal.present();
+
+    // const { data, role } = await modal.onWillDismiss();
+    // if (role === 'confirm') {
+    //   if( data){
+    //     this.getDocuments();
+    //   }
+    // }
+
+  }
+
+
+
+
 
 
   

@@ -1,19 +1,36 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LayoutPage } from './layout/layout.page';
+import { TabsComponent } from './components/tabs/tabs.component';
 
 const routes: Routes = [
   {
-    path: "",
-    redirectTo: "tab",
-    pathMatch: "full"
-  },
-
-  {
     path: 'tab',
-    loadChildren: () => import('../home/layout/layout.module').then( m => m.LayoutPageModule )
+    component: TabsComponent,
+    children: [
+      {
+        path: 'repository',
+        loadChildren:  () => import('../repository/repository.module').then(m => m.RepositoryModule)
+      },
+      {
+        path: 'category',
+        loadChildren:  () => import('../category/category.module').then(m => m.CategoryModule )
+      },
+      {
+        path: 'user',
+        loadChildren:  () => import('../user/user.module').then(m => m.UserModule )
+      },
+      {
+        path: '',
+        redirectTo: 'repository',
+        pathMatch: 'full'
+      }
+    ]
+  },
+  {
+    path: '',
+    redirectTo: 'tab',
+    pathMatch: 'full'
   }
-
 
 ];
 

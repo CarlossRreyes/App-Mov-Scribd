@@ -5,9 +5,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">category</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- listCategories -->
+  <ion-list lines="none" class="horizontal-list">
+    <ion-item *ngFor="let item of listCategories">
+      {{ item }}
+    </ion-item>
+  </ion-list>
 </ion-content>

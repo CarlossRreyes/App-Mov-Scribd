@@ -4,10 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { RepositoryPage } from './repository.page';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   component: RepositoryPage
-  // }
+  {
+    path: '',
+    component: RepositoryPage
+  }
 ];
 
 @NgModule({

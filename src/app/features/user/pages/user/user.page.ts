@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, ModalController } from '@ionic/angular';
-import { CreateUpdateDocumentComponent } from '../../components/create-update-document/create-update-document.component';
+
 import { DocumentService } from '../../services/document.service';
 import { AuthService } from 'src/app/features/auth/services/auth.service';
+import { CreateUpdatesDocumentsComponent } from './components/create-updates-documents/create-updates-documents.component';
+
 
 @Component({
   selector: 'app-user',
@@ -81,7 +83,7 @@ export class UserPage implements OnInit {
   async onClickEdit( data: any ){
     console.log( "Editar: ", data );
     const modal = await this.modalCtrl.create({
-      component: CreateUpdateDocumentComponent,
+      component: CreateUpdatesDocumentsComponent,
       mode: 'md',
       componentProps: {
         
@@ -101,7 +103,7 @@ export class UserPage implements OnInit {
 
   async onClickRegister(){
     const modal = await this.modalCtrl.create({
-      component: CreateUpdateDocumentComponent,
+      component: CreateUpdatesDocumentsComponent,
       mode: 'md',
       // componentProps: {
         

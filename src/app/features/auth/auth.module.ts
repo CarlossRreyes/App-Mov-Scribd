@@ -9,10 +9,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    SignInPage
+    
   ],
   exports: [
-    SignInPage
+    
   ],
   imports: [
     CommonModule,

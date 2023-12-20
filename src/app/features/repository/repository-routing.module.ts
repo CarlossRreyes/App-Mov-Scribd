@@ -7,12 +7,8 @@ import { RepositoryPage } from './pages/repository/repository.page';
 const routes: Routes = [
   {
     path: '',
-    component: RepositoryPage
+    loadChildren: () => import( './pages/repository/repository.module' ).then( m => m.RepositoryPageModule )
   },
-  // {
-  //   path: 'repository',
-  //   loadChildren: () => import('./pages/repository/repository.module').then( m => m.RepositoryPageModule)
-  // }
 
 ];
 

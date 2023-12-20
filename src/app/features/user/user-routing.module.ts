@@ -5,7 +5,7 @@ import { UserPage } from './pages/user/user.page';
 const routes: Routes = [
   {
     path: '',
-    component: UserPage
+    loadChildren: () => import('./pages/user/user.module').then( m => m.UserPageModule )
   }
 ];
 

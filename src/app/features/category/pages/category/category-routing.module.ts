@@ -4,10 +4,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { CategoryPage } from './category.page';
 
 const routes: Routes = [
-  // {
-  //   path: '',
-  //   component: CategoryPage
-  // }
+  {
+    path: '',
+    component: CategoryPage
+  }
 ];
 
 @NgModule({

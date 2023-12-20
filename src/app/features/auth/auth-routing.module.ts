@@ -4,18 +4,20 @@ import { SignInPage } from './pages/sign-in/sign-in.page';
 
 
 const routes: Routes = [
-  {
-    path: 'sign-in',
-    component: SignInPage
-  },
-  {
-    path: '**',
-    redirectTo: '/auth/sign-in'
-  },
   // {
   //   path: 'sign-in',
-  //   loadChildren: () => import('./pages/sign-in/sign-in.module').then( m => m.SignInPageModule)
+  //   component: SignInPage
   // },
+  // {
+  //   path: '**',
+  //   redirectTo: '/auth/sign-in'
+  // },
+
+  {
+    path: '',
+    loadChildren: () => import('./pages/sign-in/sign-in.module').then( m => m.SignInPageModule )
+  }
+
 ];
 
 @NgModule({

@@ -9,7 +9,7 @@ import { RepositoryPage } from './pages/repository/repository.page';
 
 @NgModule({
   declarations: [
-    RepositoryPage
+    
   ],
   imports: [
     CommonModule,

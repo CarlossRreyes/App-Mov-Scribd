@@ -8,7 +8,7 @@ import { CategoryPage } from './pages/category/category.page';
 
 @NgModule({
   declarations: [
-    CategoryPage
+    
   ],
   imports: [
     CommonModule,

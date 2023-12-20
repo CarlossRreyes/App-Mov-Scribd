@@ -7,16 +7,20 @@ import { IonicModule } from '@ionic/angular';
 import { RepositoryPageRoutingModule } from './repository-routing.module';
 
 import { RepositoryPage } from './repository.page';
+import { ViewRepositoryComponent } from './components/view-repository/view-repository.component';
+
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RepositoryPageRoutingModule
+    RepositoryPageRoutingModule,
+    
   ],
   declarations: [
-    RepositoryPage
+    RepositoryPage,
+    ViewRepositoryComponent
   ]
 })
 export class RepositoryPageModule {}
