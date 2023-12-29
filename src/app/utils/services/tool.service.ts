@@ -10,6 +10,7 @@ export class ToolService {
 
   // **************API URL****************
   API_URL = environment.api_url;
+  //TODO: Modificated!
 
   
   constructor(
