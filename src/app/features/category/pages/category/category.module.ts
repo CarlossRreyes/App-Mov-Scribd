@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CategoryPageRoutingModule } from './category-routing.module';
 
 import { CategoryPage } from './category.page';
+import { ViewDocumentsByCategoryComponent } from './view-documents-by-category/view-documents-by-category.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { CategoryPage } from './category.page';
     CategoryPageRoutingModule
   ],
   declarations: [
-    CategoryPage
+    CategoryPage,
+    ViewDocumentsByCategoryComponent
   ]
 })
 export class CategoryPageModule {}

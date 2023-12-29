@@ -19,4 +19,11 @@ export class CategoryService {
     const url = `${this.API_URL}/loadCategories`;
     return this.http.get<any>( url );
   }
+
+  loadDocumentsByIdCategory( id: any){
+    const url = `${this.API_URL}/loadDocumentsByIdCategory/${ id }`;
+    // console.log( url );
+    
+    return this.http.get<any>( url );
+  }
 }

@@ -59,6 +59,12 @@ export class DocumentService {
     
     return this.http.get<any>( url );
   }
+  deleteDocumentsById( document_id: number ){
+    const url = `${this.API_URL}/deleteDocument/${document_id }`;
+    // console.log( url );
+    
+    return this.http.get<any>( url );
+  }
   
   loadUserById( user_id: number ){
     const url = `${this.API_URL}/loadUserById/${user_id }`;

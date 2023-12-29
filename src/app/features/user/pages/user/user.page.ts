@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { AlertController, LoadingController, ModalController } from '@ionic/angular';
 
 import { DocumentService } from '../../services/document.service';
 import { AuthService } from 'src/app/features/auth/services/auth.service';
 import { CreateUpdatesDocumentsComponent } from './components/create-updates-documents/create-updates-documents.component';
 import { Subscription } from 'rxjs';
+import { PresentToastService } from 'src/app/utils/services/present-toast.service';
 
 
 @Component({
@@ -25,7 +26,9 @@ export class UserPage implements OnInit, OnDestroy {
     private modalCtrl: ModalController,
     private _ds: DocumentService,
     private loadingCtrl: LoadingController,
-    private _as: AuthService
+    private _as: AuthService,
+    private alerController: AlertController,
+    private _t: PresentToastService
   ) { 
     //TODO: Reactive local
     // this._as.getCurrentUserSubject.subscribe(( res: any ) => {
@@ -70,9 +73,38 @@ export class UserPage implements OnInit, OnDestroy {
 
   }
 
-  onClickDelete(){
+  onClickDelete( document_id: number){
     console.log("Delete");
-    
+    this.alerController.create({
+      header: 'Confirmar eliminación',
+      message: '¿Estás seguro de que quieres eliminar este registro?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancelado');
+          }
+        },
+        {
+          text: 'Aceptar',
+          handler: () => {
+            console.log('Eliminar');
+            this._ds.deleteDocumentsById( document_id ).subscribe({
+              next: ( resp ) => {
+                if( resp.status ){
+                  this._t.presentToastController( resp.message, 'danger', 'rocket');
+                  this.getDocuments();
+                  return;
+                }
+              }
+            })
+
+            // Coloca aquí la lógica para eliminar el registro
+          }
+        }
+      ]
+    }).then(alert => alert.present());
   }
 
   getUser(): Promise<void>{

@@ -122,6 +122,11 @@ export class CreateUpdatesDocumentsComponent  implements OnInit {
     }
 
     this.formDocument.patchValue( data );    
+
+
+    // this.formDocument.valueChanges.subscribe( value => {
+      
+    // })
   }
 
 
@@ -227,9 +232,12 @@ export class CreateUpdatesDocumentsComponent  implements OnInit {
     });
     let boolean: boolean = false;
     loading.present();
+    // TODO: ARREGLAR
     this._ds.updateDocument( data ).subscribe({
       next: ( resp ) => {
         if( !resp.status ){
+          console.log( "status error: ", resp);
+          
           this._ts.presentToastController( resp.message , 'danger', 'alert-circle'); 
           return;     
         }
@@ -364,7 +372,7 @@ export class CreateUpdatesDocumentsComponent  implements OnInit {
 
     if( form.document_id ){
       console.log("JSON PARA ACTUALIZAR");
-      
+      const datef = new Date();
       //TODO: Update
       return  {
         document_id: form.document_id,
@@ -373,7 +381,9 @@ export class CreateUpdatesDocumentsComponent  implements OnInit {
         state: form.state,
         user_id: form.user_id,
         category_id: form.category_id,
-        date_upload: new Date(),
+        // date_upload: null,
+        
+        date_upload: '2023-12-21 00:00:00',
         file: form.file === '' ? 'fisica1.pdf' : form.file,
         // rute: `files/${this.files[0].name}`,
         rute: this.files.length === 0 ? 'files/fisica1.pdf': this.files[0].name,
@@ -394,7 +404,7 @@ export class CreateUpdatesDocumentsComponent  implements OnInit {
       user_id: this.navParams.get('params_user_id') ?? null,
       // user_id: this.user_id,
       category_id: form.category_id,
-      date_upload: new Date(),
+      date_upload: '2023-12-21 00:00:00',
       file: form.file === '' ? 'fisica1.pdf' : form.file,
       rute: this.files.length === 0 ? 'files/fisica1.pdf': this.files[0].name,
       // type: fileTypeMapping[fileType] || fileType

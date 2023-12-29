@@ -26,8 +26,16 @@ export class RepositoryPage implements OnInit {
 
   async onClickViewDocument( rute: string ){
     console.log("To: ", rute );
-    await Browser.open({ url: `http://127.0.0.1/api-scribd/files/${ rute }` });
+    await Browser.open({ url: `https://appinvestigacionanahi.000webhostapp.com/api-scribd/files/${ rute }` });
     
+  }
+
+  handleRefresh( event: any) {
+    setTimeout(() => {
+      // Any calls to load data go here
+      event.target.complete();
+      this.getAllDocuments()
+    }, 3000);
   }
 
   async getAllDocuments(){

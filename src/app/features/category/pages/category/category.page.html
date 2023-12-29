@@ -5,10 +5,21 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <!-- listCategories -->
-  <ion-list lines="none" class="horizontal-list">
-    <ion-item *ngFor="let item of listCategories">
-      {{ item }}
-    </ion-item>
-  </ion-list>
+  
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12" *ngFor="let c of listCategories">
+        <ion-card mode="ios" (click)="onClickView( c.category_id )">
+          <ion-card-header>
+            <ion-card-subtitle>Codigo: {{ c.category_id}}</ion-card-subtitle>
+            <ion-card-title>{{c.name}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            
+          </ion-card-content>
+        </ion-card>
+      </ion-col>      
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
